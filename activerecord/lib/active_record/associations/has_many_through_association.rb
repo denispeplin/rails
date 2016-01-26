@@ -64,16 +64,6 @@ module ActiveRecord
         end
 
         save_through_record(record)
-        if has_cached_counter? && !through_reflection_updates_counter_cache?
-          ActiveSupport::Deprecation.warn(<<-MSG.squish)
-            Automatic updating of counter caches on through associations has been
-            deprecated, and will be removed in Rails 5. Instead, please set the
-            appropriate `counter_cache` options on the `has_many` and `belongs_to`
-            for your associations to #{through_reflection.name}.
-          MSG
-
-          update_counter_in_database(1)
-        end
         record
       end
 
